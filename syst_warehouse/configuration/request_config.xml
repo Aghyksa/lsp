@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+    
+        <record id="request_config_settings_view_form" model="ir.ui.view">
+            <field name="name">request.config.settings.view.form</field>
+            <field name="model">request.config.settings</field>
+            <field name="groups_id" eval="[(4, ref('syst_warehouse.group_admin_warehouse_syst'))]"/>
+            <field name="arch" type="xml">
+                <form string="Request Config">
+                    <sheet>
+                        <group>
+                            <group class='oe_left_column'>
+                                <field name="confirmation_button" />
+                                <field name="set_to_draft_button" />
+                            </group>
+                            <group class='oe_right_column'>
+                                <field name="request_tooltip" string="" class="text-muted lh-sm fst-italic" />
+                            </group>
+                        </group>
+                        <footer>
+                            <button string="Apply" type="object" name="execute" class="oe_highlight"/>
+                            <button string="Cancel" type="object" special="cancel" class="oe_link"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="request_config_settings_action" model="ir.actions.act_window">
+            <field name="name">Request Config</field>
+            <field name="res_model">request.config.settings</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="context">{'create': False}</field>
+        </record>
+
+    </data> 
+    
+
+</odoo>

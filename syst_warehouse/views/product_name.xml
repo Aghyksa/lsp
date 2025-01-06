@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="product_name_view_form" model="ir.ui.view">
+            <field name="name">product.name.view.form</field>
+            <field name="model">product.name</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_onhands" type="object" class="oe_stat_button" icon="fa-cubes">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_value d-flex gap-1">
+                                    <field name="onhand_count" nolabel="1" class="oe_inline"/>
+                                    <span class="oe_inline">Units</span>
+                                </span>
+                                <span class="o_stat_text">On Hand</span>
+                            </div>
+                        </button>
+                    </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" required="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <field name="quantity_id"  required="1"/>
+                            <field name="units"  required="1"/>
+                            <field name="request_count" />
+                        </group>
+                        <notebook>
+                            <page name="request_order" string="Request Order">
+                                <field name="request_line_ids" readonly="1">
+                                    <tree>
+                                        <field name="product_id" />
+                                        <field name="quantity_id" />
+                                        <field name="request_date" />
+                                        <field name="units" />
+                                        <field name="total_units" sum="Total Units"/>
+                                        <button string="Open" name="open_request" type="object" class="oe_highlight"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="product_name_view_tree" model="ir.ui.view">
+            <field name="name">product.name.view.tree</field>
+            <field name="model">product.name</field>
+            <field name="arch" type="xml">
+                <tree string="Product Name">
+                    <field name="sequence" widget="handle" />
+                    <field name="name" required="1"/>
+                    <field name="quantity_id"/>
+                    <field name="units"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="product_name_action" model="ir.actions.act_window">
+            <field name="name">Products</field>
+            <field name="res_model">product.name</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,12 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_admin_product_name_syst,admin_product_name,syst_warehouse.model_product_name,syst_warehouse.group_admin_warehouse_syst,1,1,1,1
+access_admin_quantity_warehouse,admin_quantity_warehouse,syst_warehouse.model_quantity_warehouse,syst_warehouse.group_admin_warehouse_syst,1,1,1,1
+access_admin_division_warehouse,admin_division_warehouse,syst_warehouse.model_division_warehouse,syst_warehouse.group_admin_warehouse_syst,1,1,1,1
+access_admin_request_warehouse,admin_request_warehouse,syst_warehouse.model_request_warehouse,syst_warehouse.group_admin_warehouse_syst,1,1,1,1
+access_admin_request_line,admin_request_line,syst_warehouse.model_request_line,syst_warehouse.group_admin_warehouse_syst,1,1,1,1
+access_admin_request_config_settings,admin_request_config_settings,syst_warehouse.model_request_config_settings,syst_warehouse.group_admin_warehouse_syst,1,1,1,1
+access_opname_stock_user,syst_warehouse.opname.stock,model_opname_stock,base.group_user,1,1,1,1
+access_opname_stock_line_user,syst_warehouse.opname.stock.line,model_opname_stock_line,base.group_user,1,1,1,1
+access_opname_template_user,syst_warehouse.opname.template,model_opname_template,base.group_user,1,1,1,1
+access_opname_template_line_user,syst_warehouse.opname.template.line,model_opname_template_line,base.group_user,1,1,1,1

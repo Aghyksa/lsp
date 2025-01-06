@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+    
+        <record id="division_warehouse_view_tree" model="ir.ui.view">
+            <field name="name">division.warehouse.view.tree</field>
+            <field name="model">division.warehouse</field>
+            <field name="arch" type="xml">
+                <tree editable="bottom" string="Division">
+                    <field name="sequence" widget="handle" />
+                    <field name="name" required="1" />
+                    <field name="color" widget="color_picker" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="division_warehouse_action" model="ir.actions.act_window">
+            <field name="name">Divisions</field>
+            <field name="res_model">division.warehouse</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+    
+    </data>
+    
+
+</odoo>

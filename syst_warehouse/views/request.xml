@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        <record id="request_line_ohands_view_search" model="ir.ui.view">
+            <field name="name">request.line.ohands.view.search</field>
+            <field name="model">request.line</field>
+            <field name="arch" type="xml">
+                <search>
+                    <group expand="0" string="Group By">
+                        <filter string="Request Date" name="request_date" domain="[]" context="{'group_by': 'request_date'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        
+        <record id="request_line_ohands_view_tree" model="ir.ui.view">
+            <field name="name">request.line.ohands.view.tree</field>
+            <field name="model">request.line</field>
+            <field name="arch" type="xml">
+                <tree edit="false" create="false">
+                    <field name="product_id" />
+                    <field name="quantity_id" />
+                    <field name="request_date" />
+                    <field name="units" />
+                    <field name="total_units" sum="Total Units"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="request_warehouse_view_form" model="ir.ui.view">
+            <field name="name">request.warehouse.view.form</field>
+            <field name="model">request.warehouse</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button string="Delivery" name="action_delivery" invisible="state != 'draft'" type="object" class="oe_highlight"/>
+                        <button string="Receive" name="action_receive" invisible="state != 'delivery'" type="object" class="oe_highlight"/>
+                        <button string="Set To Draft" name="action_draft" invisible="is_set_to_draft == False or state == 'draft'" type="object" class="btn-secondary"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <field name="is_confirmation" invisible="1" />
+                        <field name="is_set_to_draft" invisible="1" />
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group class="oe_left_column">
+                                <field name="request_date" readonly="state != 'draft'"/>
+                                <field name="required_date" readonly="state != 'draft'"/>
+                            </group>
+                            <group class="oe_right_column">
+                                <field name="received_date" readonly="state != 'draft'"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="warehouse_items" string="Warehouse Item(s)">
+                                <field name="request_line_ids" widget="section_and_note_one2many">
+                                    <tree editable="bottom">
+                                        <control>
+                                            <create name="add_line_control" string="Add a line"/>
+                                            <create name="add_section_control" string="Add a section" context="{'default_display_type': 'line_section'}"/>
+                                            <create name="add_note_control" string="Add a note" context="{'default_display_type': 'line_note'}"/>
+                                        </control>
+                                        <field name="sequence" widget="handle"/>
+
+                                        <field name="product_id" required="not display_type" readonly="state != 'draft'"/>
+                                        <field name="division_ids" required="not display_type" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}" readonly="state != 'draft'"/>
+                                        <field name="quantity_id" required="not display_type" readonly="state != 'draft'"/>
+                                        <field name="units" required="not display_type" readonly="state != 'draft'"/>
+                                        <field name="total_units" force_save="1" readonly="1"/>
+                                        <field name="is_received"  widget="boolean_toggle"/>
+                                        <field name="received_qty" optional="show" readonly="state != 'received'"/>
+                                        <field name="name" nolabel='1' widget="section_and_note_text" force_save='1' invisible="not display_type"/>
+                                        <!-- Column Invible -->
+                                        <field name="display_type" force_save="1" column_invisible="True"/>
+                                        <field name="request_date" force_save="1" column_invisible="True" />
+                                        <field name="request_warehouse_id" column_invisible="True"/>
+                                        <field name="state" column_invisible="True"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                        <field name="activity_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="request_warehouse_view_tree" model="ir.ui.view">
+            <field name="name">request.warehouse.view.tree</field>
+            <field name="model">request.warehouse</field>
+            <field name="arch" type="xml">
+                <tree string="Request Order">
+                    <field name="name" />
+                    <field name="request_date" />
+                    <field name="received_date" />
+                    <field name="state" widget="badge"              
+                    decoration-success="state == 'received'"
+                    decoration-info="state == 'draft'"
+                    decoration-danger="state == 'delivery'"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="request_warehouse_action" model="ir.actions.act_window">
+            <field name="name">Request Order</field>
+            <field name="res_model">request.warehouse</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="request_warehouse_sequence" model="ir.sequence">
+            <field name="name">Request Warehouse</field>
+            <field name="code">request.warehouse</field>
+            <field name="prefix">RO/%(month)s-%(y)s/</field>
+            <field name="padding">3</field>
+        </record>
+
+
+    </data>
+    
+
+</odoo>
