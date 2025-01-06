@@ -2,7 +2,6 @@ from odoo import http
 from odoo.http import request
 
 class StockOpnameController(http.Controller):
-    # ...existing code...
 
     @http.route('/get/request-warehouse', type='json', auth='user', methods=['POST'])
     def get_stock_opname(self):
