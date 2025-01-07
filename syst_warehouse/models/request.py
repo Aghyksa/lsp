@@ -51,6 +51,7 @@ class RequestWarehouse(models.Model):
         })
         for line in self.request_line_ids:
             line.received_qty = line.total_units
+            
 class RequestLine(models.Model):
     _name = 'request.line'
     _description = 'Request Line'

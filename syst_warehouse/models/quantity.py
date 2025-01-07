@@ -4,7 +4,8 @@ class QuantityWarehouse(models.Model):
     _name = 'quantity.warehouse'
     _description = 'Quantity Warehouse'
     _order = 'sequence'
-
+    
+    # Unique Key
     _sql_constraints = [
         ('unique_name', 'unique(name)', 'The name must be unique!'),
         ('unique_code', 'unique(code)', 'The code must be unique!')
